@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASSIFIED: OPERATION NELL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bgm-action" loop><source src="assets/Modern Warfare 2 Soundtrack - 14 Rangers Lead The Way.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-radio"><source src="assets/Static TV noise #whitenoise #tv #static #old #nostalgia #like #chill #viral #calm #relax #trending.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-type"><source src="assets/Hacking Sound Effect... #soundeffects #hacking.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-gun"><source src="assets/Colt M1909  Gunshot Gun Sound Effect  Revolver  #shorts #revolver #colt#gun #gunsound.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-beep"><source src="assets/Time Bomb Explosion #3 SOUND Effect #SOUNDFX.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-win"><source src="assets/MW2 Level Up sound.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-sniper"><source src="https://www.soundjay.com/mechanical/sounds/explosion-01.mp3" type="audio/mpeg"></audio>
+
+    <div id="crt-scanlines"></div>
+    <div id="screen-glitch" class="hidden"></div>
+<div id="tactical-transition">
+        <h2 class="transition-text glitch" data-text="LOADING INTEL...">LOADING INTEL...</h2>
+    </div>
+    <section id="mission-start" class="mission-section active-mission">
+        <div class="hud-container text-center">
+            <h3 class="intel-text glitch" data-text="RESTRICTED ACCESS">RESTRICTED ACCESS</h3>
+            <h1 class="main-title mt-20">OPERATION:<br>LEVEL UP</h1>
+            <p class="blink-text mt-40">[ TAP SCREEN TO INITIALIZE UPLINK ]</p>
+        </div>
+    </section>
+
+    <section id="mission-briefing" class="mission-section hidden vn-layout">
+        <div class="character-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczFlaDlnamNvdWpkeDJ6Zmxyazg1dTJzYjkyY2V3MGFoNDV1Z2gyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tpD74kNwBrDjusE5Kz/giphy.gif" alt="Captain Price" class="character-sprite slide-in-left">
+        </div>
+        <div class="hud-dialogue-box fade-in-up">
+            <div class="hud-namebox">CPT. PRICE</div>
+            <p id="price-text" class="hud-text"></p>
+            <button id="btn-deploy" class="tactical-btn hidden mt-20">ACKNOWLEDGE ▶</button>
+        </div>
+    </section>
+
+    <section id="mission-terminal" class="mission-section hidden">
+        <div class="intel-box" style="width: 90%; max-width: 600px;">
+            <h2 class="text-blue glitch" data-text="SYSTEM OVERRIDE REQUIRED">SYSTEM OVERRIDE REQUIRED</h2>
+            <div class="intel-content mt-20">
+                <p>IDENTIFY YOUR SQUAD CALLSIGN TO UNLOCK GULAG DOORS:</p>
+                <p class="text-orange" style="font-size: 0.9rem;">(Hint: In-game name mu)</p>
+                <div class="terminal-input-group mt-20">
+                    <span class="text-green">> </span>
+                    <input type="text" id="hack-input" autocomplete="off" placeholder="ENTER CALLSIGN" spellcheck="false">
+                </div>
+                <p id="hack-msg" class="mt-20"></p>
+                <button id="btn-hack" class="tactical-btn mt-20">SUBMIT PROTOCOL</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission-gulag" class="mission-section hidden">
+        <div class="hud-corner top-left"></div> <div class="hud-corner top-right"></div>
+        <div class="hud-corner bottom-left"></div> <div class="hud-corner bottom-right"></div>
+
+        <h1 class="mission-title text-red glitch" data-text="THE GULAG">THE GULAG</h1>
+        <p class="mission-desc">Prove your aim, Agent Nell. Eliminate 5 targets.</p>
+        
+        <div class="aim-arena" id="aim-arena"></div>
+        <div class="score-board" id="gulag-score-board">HOSTILES KIA: <span id="gulag-score" class="text-green">0</span> / 5</div>
+
+        <div id="gulag-aar" class="hidden intel-box mt-20" style="width: 90%; max-width: 600px;">
+            <h2 class="text-blue">AFTER ACTION REPORT</h2>
+            <div class="intel-content">
+                <p><strong>Accuracy:</strong> <span id="stat-acc" class="text-green">0</span>%</p>
+                <p><strong>Avg Reaction Time:</strong> <span id="stat-rt" class="text-orange">0</span> ms</p>
+                <p id="stat-comment" class="mt-20 blink-text"></p>
+            </div>
+            <button id="btn-to-snd" class="tactical-btn mt-20">PROCEED TO BOMB SITE ▶</button>
+        </div>
+    </section>
+
+    <section id="mission-snd" class="mission-section hidden">
+        <div class="character-container right-side">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczFlaDlnamNvdWpkeDJ6Zmxyazg1dTJzYjkyY2V3MGFoNDV1Z2gyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lOhd7ncRuqNF3xEG8n/giphy.gif" alt="Ghost" class="character-sprite ghost-img">
+        </div>
+        <div class="bomb-hud" id="bomb-ui">
+            <h1 class="mission-title text-orange">SEARCH & DESTROY</h1>
+            <p class="mission-desc">Defuse the package. Auth Code: <strong class="text-green">1-4-1</strong></p>
+            <div class="timer" id="bomb-timer">00:15:00</div>
+            <div class="keypad-3d">
+                <button class="key-btn" data-num="1">1</button> <button class="key-btn" data-num="2">2</button>
+                <button class="key-btn" data-num="3">3</button> <button class="key-btn" data-num="4">4</button>
+            </div>
+            <div class="input-display" id="defuse-input">_ _ _</div>
+        </div>
+    </section>
+
+    <section id="mission-qte" class="mission-section hidden qte-bg">
+        <div id="qte-ui">
+            <h1 class="qte-warning blink-text">AMBUSH INCOMING!</h1>
+            <p class="mission-desc text-white">SNIPER DETECTED! EVADE NOW!</p>
+            <button id="btn-evade" class="qte-btn pulse-anim">EVADE (TAP!)</button>
+        </div>
+        <div id="death-screen" class="hidden">
+            <h1 class="death-text">YOU DIED</h1>
+            <p class="mission-desc text-white mt-20">Reaction too slow, Agent. Retrying...</p>
+        </div>
+    </section>
+
+    <section id="mission-victory" class="mission-section hidden">
+        <div id="supply-drop-phase" class="text-center">
+            <h2 class="text-blue glitch" data-text="CARE PACKAGE INBOUND">CARE PACKAGE INBOUND</h2>
+            <p class="mission-desc mt-20">Tap the crate to force it open!</p>
+            <div class="crate-container mt-40" id="care-package">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczFlaDlnamNvdWpkeDJ6Zmxyazg1dTJzYjkyY2V3MGFoNDV1Z2gyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ipkzpigwaFyIfoQoWf/giphy.gif" alt="Care Package" class="crate-img">
+                <p id="crate-counter" class="text-orange mt-20">0 / 10 TAPS</p>
+            </div>
+        </div>
+        
+        <div id="real-victory-content" class="hidden">
+            <div class="victory-banner">
+                <h1 class="victory-title text-blue">MISSION ACCOMPLISHED</h1>
+            </div>
+            <div class="victory-content">
+                <h2 class="level-up-text">HAPPY BIRTHDAY, KIPLI (AGENT NELL)!</h2>
+                <div class="gif-container mt-20">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczFlaDlnamNvdWpkeDJ6Zmxyazg1dTJzYjkyY2V3MGFoNDV1Z2gyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CLVI6oHemGq6r1DIzs/giphy.gif" alt="Ghost Meme" class="meme-gif">
+                </div>
+                <div class="closing-message mt-20">
+                    <p>"Target 'Aging' has been neutralized. Agent Nell is officially leveled up. Keep your aim sharp, your K/D high, and your squad close. Stay frosty out there, brother!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
